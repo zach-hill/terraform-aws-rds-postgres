@@ -84,9 +84,21 @@ variable "auto_minor_version_upgrade" {
 variable "storage_type" {
   description = "The type of storage to use, either \"standard\" (magnetic) or \"gp2\" (general purpose SSD)."
   default = "standard"
+}
 
-  validation {
-    condition     = contains(["standard", "gp2"], var.storage_type)
-    error_message = "Must be one of standard or gp2. Provisioned IOPS (io1) not yet supported."
-  }
+variable "apply_immediately" {
+  default = false
+}
+
+variable "max_allocated_storage" {
+  default = null
+}
+
+variable "iops" {
+  description = "The amount of provisioned IOPS, if storage_type is set to \"io1\", if not it's ignored."
+  default = "3000"
+}
+
+variable "tags" {
+  default = {}
 }
